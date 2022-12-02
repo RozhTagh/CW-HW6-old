@@ -54,30 +54,24 @@ int main(){
     scanf("%d%d%d", &base1, &base2, &num);
 
     int result1 = base1_to_base10(num, base1);
-    //printf("%d\n", result1);
 
-    int result2 = base10_to_base2(result1, base2);
-    //printf("%d\n", result2);
+    int result = base10_to_base2(result1, base2);
 
-    int digitcount = digitnum(result2);
-    //printf("%d\n",digitcount);
+    int digitcount = digitnum(result);
 
     if (digitcount%2==0){
-        int right = result2/pow(10,digitcount/2);
-        int left = result2 % (int)pow(10,digitcount/2);
-        int final_result = right + left;
-        printf("%d\n", base10_to_base2(final_result, base2));
+        int right = result/pow(10,digitcount/2);
+        int left = result % (int)pow(10,digitcount/2);
+        printf("%d", right + left);
     }
 
     else{
-        result2 = result2 * 10;
-        int right = result2/pow(10,(digitcount+1)/2);
-        int left = result2 % (int)pow(10,(digitcount+1)/2);
-        int final_result = right + left;
-        printf("%d\n", base10_to_base2(final_result, base2));
+        result = result * 10;
+        int right = result/pow(10,(digitcount+1)/2);
+        int left = result % (int)pow(10,(digitcount+1)/2);
+        printf("%d", right + left);
     }
 
 
     return 0;
 }
-
