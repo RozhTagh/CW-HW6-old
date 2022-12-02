@@ -1,6 +1,18 @@
 #include <stdio.h>
 #include <math.h>
 
+int power(int a, int b){
+
+    int result = 1;
+
+    for(int i =0; i<b; i++)
+        result = result * a;
+
+    return result;
+}
+
+
+
 int base1_to_base10(int num, int base){
 
     int i = 0;
@@ -9,7 +21,24 @@ int base1_to_base10(int num, int base){
 
     while (num!=0){
         x = num%10;
-        sum = sum + (x*pow(base,i));
+        sum = sum + (x*power(base,i));
+        num = num/10;
+        i++;
+    }
+
+    return sum;
+
+}
+
+int base2_to_base10(int num, int base){
+
+    int i = 0;
+    int x;
+    int sum = 0;
+
+    while (num!=0){
+        x = num%10;
+        sum = sum + (x*power(base,i));
         num = num/10;
         i++;
     }
@@ -28,7 +57,7 @@ int base10_to_base2(int num, int base){
 
         x = num%base;
         num = num/base;
-        sum = sum + (x* pow(10,i));
+        sum = sum + (x* power(10,i));
         i++;
     }
 
@@ -54,22 +83,27 @@ int main(){
     scanf("%d%d%d", &base1, &base2, &num);
 
     int result1 = base1_to_base10(num, base1);
+    //printf("%d\n", result1);
 
-    int result = base10_to_base2(result1, base2);
+    int result2 = base10_to_base2(result1, base2);
+    //printf("%d\n", result2);
 
-    int digitcount = digitnum(result);
+    int digitcount = digitnum(result2);
+    //printf("%d\n",digitcount);
 
     if (digitcount%2==0){
-        int right = result/pow(10,digitcount/2);
-        int left = result % (int)pow(10,digitcount/2);
-        printf("%d", right + left);
+        int right = result2/power(10,digitcount/2);
+        int left = result2 % (int)power(10,digitcount/2);
+        int final_result = base2_to_base10((right+left), base2);
+        printf("%d\n", base10_to_base2(final_result, base2));
     }
 
     else{
-        result = result * 10;
-        int right = result/pow(10,(digitcount+1)/2);
-        int left = result % (int)pow(10,(digitcount+1)/2);
-        printf("%d", right + left);
+        result2 = result2 * 10;
+        int right = result2/power(10,(digitcount+1)/2);
+        int left = result2 % (int)power(10,(digitcount+1)/2);
+        int final_result = base2_to_base10((right+left), base2);
+        printf("%d\n", base10_to_base2(final_result, base2));
     }
 
 
