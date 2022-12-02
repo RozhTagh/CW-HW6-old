@@ -92,17 +92,17 @@ int main(){
     //printf("%d\n",digitcount);
 
     if (digitcount%2==0){
-        int right = result2/power(10,digitcount/2);
-        int left = result2 % (int)power(10,digitcount/2);
-        int final_result = base2_to_base10((right+left), base2);
+        int right = result2 % power(10,digitcount/2);
+        int left = result2 / power(10,digitcount/2);
+        int final_result = base2_to_base10(right, base2) + base2_to_base10(left, base2);
         printf("%d\n", base10_to_base2(final_result, base2));
     }
 
     else{
         result2 = result2 * 10;
-        int right = result2/power(10,(digitcount+1)/2);
-        int left = result2 % (int)power(10,(digitcount+1)/2);
-        int final_result = base2_to_base10((right+left), base2);
+        int right = result2 % power(10,(digitcount+1)/2);
+        int left = result2 / power(10,(digitcount+1)/2);
+        int final_result = base2_to_base10(right, base2) + base2_to_base10(left, base2);
         printf("%d\n", base10_to_base2(final_result, base2));
     }
 
